@@ -1,0 +1,64 @@
+<!doctype html>
+<html ng-app="driveManager" ng-controller="ApplicationController">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ app.routeTitle }} | Drive Manager</title>
+
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="vendor/ionicons/css/ionicons.min.css">
+	<link rel="stylesheet" href="vendor/datatables/media/css/jquery.dataTables.css">
+	<link rel="stylesheet" href="dist/main.css">
+
+</head>
+<body class="skin-blue">
+	<h1 class="header">Drive Manager <a href="/" class="btn btn-primary"><span class="fa fa-home"></span></a></h1>
+	<div ng-show="isAuthenticated()" class="wrapper" ng-view>
+	</div><!-- ./wrapper -->
+
+	<div class="login" ng-show="! isAuthenticated()" ng-controller="LoginController">
+		<div class="form-box" id="login-box">
+			<div class="header">Connexion à l'espace privé</div>
+			<form ng-submit="login(credentials)" method="post" novalidate>
+				<div class="body bg-gray">
+					<div class="form-group">
+						<input type="text" ng-model="credentials.username" name="username" class="form-control" placeholder="Nom d'utilisateur" autofocus>
+					</div>
+					<div class="form-group">
+						<input type="password" ng-model="credentials.password" name="password" class="form-control" placeholder="Mot de passe">
+					</div>
+					<div class="form-group">
+						<input type="checkbox" name="remember_me"> Se rappeler
+					</div>
+				</div>
+				<div class="footer">
+					<button type="submit" class="btn bg-olive btn-block">Connexion</button>
+
+					<p><a href="#">J'ai oublié mon mot de passe</a></p>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="loading" ng-show="! isLoaded">
+		<h1>Drive Manager</h1>
+		<img src="img/loading.gif">
+	</div>
+
+	<!-- Javascripts -->
+	<script src="vendor/lodash/dist/lodash.min.js"></script>
+	<script src="vendor/jquery/dist/jquery.min.js"></script>
+	<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="vendor/angular/angular.js"></script>
+	<script src="vendor/angular-route/angular-route.min.js"></script>
+	<script src="vendor/restangular/dist/restangular.min.js"></script>
+	<script src="vendor/datatables/media/js/jquery.dataTables.js"></script>
+
+	<!-- App -->
+	<script src="conf.js"></script>
+	<script src="dist/app.js"></script>
+</body>
+</html>

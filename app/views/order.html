@@ -1,0 +1,26 @@
+<div id="order">
+	<h3>Commande n°{{ order.reference }} pour {{ order.customer.lastname }} {{ order.customer.firstname }}</h3>
+	<hr>
+	<div ng-show="order.user_id == null">
+		<button class="btn btn-primary" ng-click="start()">Commencer la préparation</button>
+	</div>
+	<div ng-show="order.user_id == app.user.id">
+		<table class="table table-striped">
+			<tr>
+				<th>Nom</th>
+				<th>Quantité</th>
+				<th></th>
+			</tr>
+			<tr ng-repeat="line in order.lines" ng-class="{ selected : line.prepared }" ng-click="select(line)">
+				<td>{{ line.product_state.name }}</td>
+				<td>{{ line.quantity }}</td>
+				<td><input type="checkbox" ng-model="line.prepared" ng-checked="line.prepared == 1"></td>
+			</tr>
+		</table><br />
+
+		<button class="btn btn-success btn-lg" ng-click="valid()">Valider la préparation</button>
+	</div>
+	<div ng-show="order.user_id != null && order.user_id != app.user.id">
+		<div class="alert alert-danger">La commande est déjà en cours de préparation par une autre personne</div>
+	</div>
+</div>
