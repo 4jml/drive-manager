@@ -70,4 +70,50 @@
 			</table>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h3>Commandes livrées</h3>
+			<table class="table table-bordered">
+				<tr>
+					<th>#</th>
+					<th>Client</th>
+					<th>Date prévue</th>
+					<th>Quantité</th>
+					<th>Prix total</th>
+					<th>Utilisateur</th>
+				</tr>
+				<tr ng-repeat="order in orders.delivered" ng-click="open(order)">
+					<td>{{ order.reference }}</td>
+					<td>{{ order.customer.lastname }} {{ order.customer.firstname }}</td>
+					<td>{{ order.date }}</td>
+					<td>{{ order.quantity }}</td>
+					<td>{{ order.total }}</td>
+					<td><strong>{{ order.user.username }}</strong></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<h3>Commandes annulées</h3>
+			<table class="table table-bordered">
+				<tr>
+					<th>#</th>
+					<th>Client</th>
+					<th>Date prévue</th>
+					<th>Quantité</th>
+					<th>Prix total</th>
+					<th>Utilisateur</th>
+				</tr>
+				<tr ng-repeat="order in orders.canceled" ng-click="open(order)">
+					<td>{{ order.reference }}</td>
+					<td>{{ order.customer.lastname }} {{ order.customer.firstname }}</td>
+					<td>{{ order.date }}</td>
+					<td>{{ order.quantity }}</td>
+					<td>{{ order.total }}</td>
+					<td><strong>{{ order.user.username }}</strong></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 </div>

@@ -4,23 +4,38 @@
 	<div ng-show="order.user_id == null">
 		<button class="btn btn-primary" ng-click="start()">Commencer la préparation</button>
 	</div>
-	<div ng-show="order.user_id == app.user.id">
+	<div ng-show="order.user_id == app.user.id && ! order.prepared">
 		<table class="table table-striped">
 			<tr>
 				<th>Nom</th>
 				<th>Quantité</th>
 				<th></th>
 			</tr>
-			<tr ng-repeat="line in order.lines" ng-class="{ selected : line.prepared }" ng-click="select(line)">
+			<tr ng-repeat="line in order.lines">
 				<td>{{ line.product_state.name }}</td>
-				<td>{{ line.quantity }}</td>
-				<td><input type="checkbox" ng-model="line.prepared" ng-checked="line.prepared == 1"></td>
+				<td>
+					<button class="btn btn-primary" ng-click="less(line)" ng-disabled="! line.availableQuantity">-</button>
+					&nbsp;&nbsp;&nbsp;{{ line.availableQuantity }}&nbsp;&nbsp;&nbsp;
+					<button class="btn btn-primary" ng-click="more(line)" ng-disabled="line.quantity == line.availableQuantity">+</button>
+				</td>
 			</tr>
 		</table><br />
 
 		<button class="btn btn-success btn-lg" ng-click="valid()">Valider la préparation</button>
 	</div>
-	<div ng-show="order.user_id != null && order.user_id != app.user.id">
+	<div ng-show="order.user_id != null && order.user_id != app.user.id && ! order.prepared">
 		<div class="alert alert-danger">La commande est déjà en cours de préparation par une autre personne</div>
+	</div>
+
+	<div ng-show="order.prepared">
+		<div class="alert alert-success">
+			La commande est déjà préparée.
+		</div>
+		<div class="alert alert-success" ng-show="order.delivered">
+			La commande est livrée.
+		</div>
+		<div class="alert alert-warning" ng-show="order.canceled">
+			La commande a été refusée par le client.
+		</div>
 	</div>
 </div>

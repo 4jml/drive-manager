@@ -6,11 +6,13 @@ driveManager.controller('OrdersController', function ($scope, $routeParams, Rest
 		Restangular.one('drive/orders', $scope.order.id).customPUT($scope.order, null);
 	}
 
-	$scope.select = function(line) {
-		if (line.prepared == 1)
-			line.prepared = 0;
-		else
-			line.prepared = 1;
+	$scope.more = function(line) {
+		if (line.quantity != line.availableQuantity)
+		line.availableQuantity++;
+	}
+	$scope.less = function(line) {
+		if (line.availableQuantity)
+			line.availableQuantity--;
 	}
 
 	$scope.valid = function() {
