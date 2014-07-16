@@ -4,7 +4,7 @@
 	<div ng-show="order.user_id == null">
 		<button class="btn btn-primary" ng-click="start()">Commencer la préparation</button>
 	</div>
-	<div ng-show="order.user_id == app.user.id && ! order.prepared">
+	<div ng-show="order.user_id == app.user.id && order.prepared == 0">
 		<table class="table table-striped">
 			<tr>
 				<th>Nom</th>
@@ -23,7 +23,7 @@
 
 		<button class="btn btn-success btn-lg" ng-click="valid()">Valider la préparation</button>
 	</div>
-	<div ng-show="order.user_id != null && order.user_id != app.user.id && ! order.prepared">
+	<div ng-show="order.user_id != null && order.user_id != app.user.id && order.prepared == 0">
 		<div class="alert alert-danger">La commande est déjà en cours de préparation par une autre personne</div>
 	</div>
 
